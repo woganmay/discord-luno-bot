@@ -1,0 +1,29 @@
+{
+  "name": "discord-luno-bot",
+  "version": "1.0.0",
+  "description": "Fetch tickers from Luno.com",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woganmay/discord-luno-bot.git"
+  },
+  "author": "Wogan May",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/woganmay/discord-luno-bot/issues"
+  },
+  "homepage": "https://github.com/woganmay/discord-luno-bot#readme",
+  "dependencies": {
+    "bufferutil": "^3.0.3",
+    "discord.js": "^11.2.1",
+    "erlpack": "github:hammerandchisel/erlpack",
+    "libsodium-wrappers": "^0.5.4",
+    "node-opus": "^0.2.7",
+    "opusscript": "0.0.3",
+    "sodium": "^2.0.1",
+    "uws": "^0.14.5"
+  }
+}
