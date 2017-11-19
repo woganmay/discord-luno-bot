@@ -17,14 +17,14 @@
   },
   "homepage": "https://github.com/woganmay/discord-luno-bot#readme",
   "dependencies": {
+    "sodium": "^2.0.1",
     "bufferutil": "^3.0.3",
+    "libsodium-wrappers": "^0.5.4",
     "discord.js": "^11.2.1",
     "erlpack": "github:hammerandchisel/erlpack",
-    "libsodium-wrappers": "^0.5.4",
     "moment": "^2.19.2",
     "node-opus": "^0.2.7",
     "opusscript": "0.0.3",
-    "sodium": "^2.0.1",
     "uws": "^0.14.5"
   }
 }
