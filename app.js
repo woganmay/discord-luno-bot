@@ -1,36 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const https = require('https');
-const moment = require('moment');
-
-function getLunoTicker(callback) {
-  return getLunoTickerFull(function(ticker) {
-    var dateFormatted = moment(ticker.timestamp);
-    var priceFormatted = parseFloat(ticker.bid).toFixed(0).replace(/./g, function(c, i, a) { return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c; });
-    callback({
-      text: "`["+dateFormatted+"] BTC/ZAR "+priceFormatted+"`"
-    });
-  });
-}
-
-function getLunoTickerFull(callback)
-{
-  return https.get({
-    host: 'api.mybitx.com',
-    path: '/api/1/ticker?pair=XBTZAR'
-  }, function(response) {
-    var body = '';
-    response.on('data', function(d) { body += d; });
-    response.on('end', function() {
-      
-      var parsed = JSON.parse(body);
-      
-      callback(parsed);
-      
-    });
-  });
-}
+const luno = require('./luno.js');
 
 // When any new message is received
 client.on("message", async message => {
@@ -40,33 +11,60 @@ client.on("message", async message => {
   if(message.content.indexOf(config.prefix) !== 0) return;
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
-
-  if(command === "luno") {
-
+  const entry = args.shift().toLowerCase();
+  
+  if (entry === "luno") {
+    
     // Get ticker data from Luno.com
     console.log("Fetching ticker on request of: " + message.author.username + "#" + message.author.discriminator);
-
-    // Send back as a message
-    getLunoTicker(function(text){
-      message.channel.send(text);
-    });
-
-  }
-  
-  if (command === "test1") {
     
-    getLunoTickerFull(function(ticker){
-      
-      message.channel.send({embed: {
-        color: 3447003,
-        description: "A very simple Embed!"
-      }});
-      
-    });
+    // Default
+    if (args.length == 0) args.push("zar");
+    
+    switch(args[0])
+    {
+      case "help":  
+        message.channel.send({embed: {
+          color: 0xF69222,
+          description: "You can use the following commands: \n\n\
+`.luno      - Default: Show the BTC/ZAR ticker`\n\
+`.luno zar  - Show the BTC/ZAR ticker`\n\
+`.luno ngn  - Show the BTC/NGN ticker`\n\
+`.luno myr  - Show the BTC/MYR ticker`\n\
+`.luno idr  - Show the BTC/IDR ticker`\n\
+`.luno help - This help message`"
+        }});
+      break;
+      case "zar":
+        luno.getLunoTickerFull("XBTZAR", function(ticker){
+          message.channel.send(luno.createEmbed(ticker));
+        });
+      break;
+      case "ngn":   
+        luno.getLunoTickerFull("XBTNGN", function(ticker){
+          message.channel.send(luno.createEmbed(ticker));
+        });
+      break;
+      case "myr":   
+        luno.getLunoTickerFull("XBTMYR", function(ticker){
+          message.channel.send(luno.createEmbed(ticker));
+        });
+      break;
+      case "idr":   
+        luno.getLunoTickerFull("XBTIDR", function(ticker){
+          message.channel.send(luno.createEmbed(ticker));
+        });
+      break;
+      default:
+        message.channel.send({embed: {
+          color: 0xFF0000,
+          description: "Sorry, I don't know that command!"
+        }});
+      break;
+    }
+    
     
   }
-  
 
 });
 
