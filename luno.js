@@ -40,14 +40,17 @@ function createEmbed(ticker) {
       color: 0xF69222,
       fields: [
         { name: "Pair",        value: ticker.pair,                                                     inline: true },
-        { name: "Last Trade",  value: formatLunoCurrency(ticker.last_trade),                           inline: true },
         { name: "Timestamp",   value: moment(ticker.timestamp).format("YYYY-MM-DD HH:mm:ss") + " UTC", inline: true },
-        { name: "Bid",         value: formatLunoCurrency(ticker.bid),                                  inline: true },
         { name: "Ask",         value: formatLunoCurrency(ticker.ask),                                  inline: true },
+        { name: "Bid",         value: formatLunoCurrency(ticker.bid),                                  inline: true },
+        { name: "Last Trade",  value: formatLunoCurrency(ticker.last_trade),                           inline: true },
         { name: "24hr Volume", value: "BTC " + ticker.rolling_24_hour_volume,                          inline: true }
       ],
+      image: {
+        "url": "https://discord-luno-bot.amberstone.digital/?pair="+ticker.pair+"&cb=" + Math.random()
+      },
       footer: {
-        text: "`.luno help` for more info"
+        text: "`.luno help` for more info | ❗️ Click the image to view the full chart"
       }
     }
   }
