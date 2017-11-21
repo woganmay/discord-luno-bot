@@ -1,6 +1,8 @@
 # discord-luno-bot
 
-
+<p align="center">
+    <img src="https://raw.githubusercontent.com/woganmay/discord-luno-bot/master/screenshot.png">
+</p>
 
 A simple bot that looks up the latest ticker data from Luno.com. This is an unofficial bot.
 
