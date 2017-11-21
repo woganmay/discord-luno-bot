@@ -46,18 +46,15 @@ function createEmbed(ticker) {
         { name: "Last Trade",  value: formatLunoCurrency(ticker.last_trade),                           inline: true },
         { name: "24hr Volume", value: "BTC " + ticker.rolling_24_hour_volume,                          inline: true }
       ],
+      image: {
+        "url": "https://discord-luno-bot.amberstone.digital/?pair="+ticker.pair+"&cb=" + Math.random()
+      },
       footer: {
         text: "`.luno help` for more info"
       }
     }
   }
 }
-
-/*,
-  image: {
-    "url": "https://discord-luno-bot.amberstone.digital/?pair="+ticker.pair+"&cb=" + Math.random()
-  },
-*/
 
 exports.getLunoTicker = getLunoTicker;
 exports.getLunoTickerFull = getLunoTickerFull;
