@@ -68,5 +68,16 @@ client.on("message", async message => {
 
 });
 
+// Every 30 seconds
+client.on("ready", () => {
+  client.user.setGame(null);
+  setInterval(function(){
+    luno.getLunoTickerFull("XBTZAR", function(ticker){
+      var bid = luno.formatLunoCurrency(ticker.bid);
+      client.user.setGame(`BTC/ZAR ${bid}`);  
+    });
+  }, 30000);
+});
+
 // Perform the actual login
 client.login(config.token);

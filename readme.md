@@ -6,6 +6,8 @@
 
 A simple bot that looks up the latest ticker data from Luno.com. This is an unofficial bot.
 
+Borrows from https://gist.github.com/eslachance/3349734a98d30011bb202f47342601d3
+
 ## Commands
 
     .luno      - Default: Show the BTC/ZAR ticker
@@ -19,3 +21,4 @@ A simple bot that looks up the latest ticker data from Luno.com. This is an unof
 
 * make, libtool, autoconf, automake, build-essential, etc
 * Node v8.0.0 (nvm install 8.0.0)
+
